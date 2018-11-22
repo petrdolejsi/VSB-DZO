@@ -1,0 +1,6 @@
+﻿  Exercise11.cpp
+c:\users\petr\onedrive - všb-tu ostrava\škola\ing. 1. ročník\1. semestr\dzo\dzo - vs\dip\utils.h(134): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\petr\onedrive - všb-tu ostrava\škola\ing. 1. ročník\1. semestr\dzo\dzo - vs\dip\utils.h(135): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\petr\onedrive - všb-tu ostrava\škola\ing. 1. ročník\1. semestr\dzo\dzo - vs\dip\utils.h(136): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\petr\onedrive - všb-tu ostrava\škola\ing. 1. ročník\1. semestr\dzo\dzo - vs\dip\utils.h(137): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  DIP.vcxproj -> C:\Users\Petr\OneDrive - VŠB-TU Ostrava\Škola\Ing. 1. ročník\1. semestr\DZO\dzo - vs\x64\Debug\DIP.exe
