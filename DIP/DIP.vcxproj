@@ -164,6 +164,7 @@
     <ClCompile Include="DIP.cpp" />
     <ClCompile Include="Exercise10.cpp" />
     <ClCompile Include="Exercise11.cpp" />
+    <ClCompile Include="Exercise12.cpp" />
     <ClCompile Include="Exercise4.cpp" />
     <ClCompile Include="Exercise2.cpp" />
     <ClCompile Include="Exercise3.cpp" />

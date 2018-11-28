@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "utils.h"
 
 void fillData(cv::Mat &leftSide, cv::Mat &rightSide, cv::Point2d backgroundPoint, cv::Point flagPoint, int i);
 
@@ -8,10 +7,12 @@ int exercise10()
 	cv::Mat background = cv::imread("images/vsb.jpg", CV_LOAD_IMAGE_COLOR);
 	cv::Mat flag = cv::imread("images/flag.png", CV_LOAD_IMAGE_COLOR);
 
-	if (background.empty()) {
+	if (background.empty()) 
+	{
 		printf("Unable to read input file (%s, %d).", __FILE__, __LINE__);
 	}
-	if (flag.empty()) {
+	if (flag.empty()) 
+	{
 		printf("Unable to read input file (%s, %d).", __FILE__, __LINE__);
 	}
 
@@ -49,8 +50,10 @@ int exercise10()
 
 	cv::Mat result = cv::Mat(background.rows, background.cols, CV_8UC3);
 
-	for (int y = 0; y < background.rows; y++) {
-		for (int x = 0; x < background.cols; x++) {
+	for (int y = 0; y < background.rows; y++) 
+	{
+		for (int x = 0; x < background.cols; x++) 
+		{
 			point = (cv::Mat_<double>(3, 1) << x, y, 1);
 
 			w = mat3x3 * point;

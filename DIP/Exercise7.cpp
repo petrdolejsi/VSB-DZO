@@ -1,5 +1,4 @@
 #include "stdafx.h"	
-#include "utils.h"
 
 int exercise7noise(const char* sourceText, int radiusLow, int radiusHigh)
 {

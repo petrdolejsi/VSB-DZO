@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "utils.h"
 
 void drawHistogram(cv::Mat &hist, const char* name);
 cv::Mat calcHistogram(cv::Mat &src);
@@ -10,7 +9,8 @@ int exercise9()
 {
 	cv::Mat input = cv::imread("images/uneq.jpg", CV_LOAD_IMAGE_GRAYSCALE);
 
-	if (input.empty()) {
+	if (input.empty()) 
+	{
 		printf("Unable to read input file (%s, %d).", __FILE__, __LINE__);
 	}
 

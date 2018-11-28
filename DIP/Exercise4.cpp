@@ -8,6 +8,7 @@ int exercise4()
 	{
 		printf("Unable to read input file (%s, %d).", __FILE__, __LINE__);
 	}
+
 	cv::cvtColor(original, original, CV_BGR2GRAY);
 
 	cv::imshow("Original", original);

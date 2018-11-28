@@ -142,4 +142,70 @@ static cv::Vec3b bilinearInterpolation(cv::Mat &source, double imageY, double im
 	return (f_00 * (1 - x) * (1 - y)) + (f_01 * x * (1 - y)) + (f_10 * (1 - x) * y) + (f_11 * x * y);
 }
 
+static cv::Mat RotateImage(const cv::Mat &source, const double angle)
+{
+	cv::Point center = cv::Point(source.cols / 2, source.rows / 2);
+	double scale = 1.0;
+
+	cv::Mat rotated_matrix(2, 3, CV_32FC1);
+
+	cv::Mat rotated_image;
+
+	rotated_matrix = cv::getRotationMatrix2D(center, angle, scale);
+
+	cv::warpAffine(source, rotated_image, rotated_matrix, source.size());
+
+	return rotated_image;
+}
+
+static void CentralDifference(cv::Mat &source, cv::Mat &output)
+{
+	for (int y = 1; y < source.rows - 1; y++)
+	{
+		for (int x = 1; x < source.cols - 1; x++)
+		{
+			uchar fxPlus = source.at<uchar>(y, x + 1);
+			uchar fxMinus = source.at<uchar>(y, x - 1);
+
+			uchar fyPlus = source.at<uchar>(y + 1, x);
+			uchar fyMinus = source.at<uchar>(y - 1, x);
+
+			output.at<uchar>(y, x) = sqrt(pow((fxMinus - fxPlus) / 2, 2) + pow((fyMinus - fyPlus) / 2, 2));
+		}
+	}
+}
+
+static void Sobel(cv::Mat &source, cv::Mat &output)
+{
+	const int size1 = 3;
+	int xMask[size1][size1] = { { 1, 0,-1 } , { 2, 0,-2 } , { 1, 0,-1 } };
+	int yMask[size1][size1] = { { 1, 2, 1 } , { 0, 0, 0 } , {-1,-2,-1 } };
+
+	int halfSize1 = size1 / 2;
+
+	for (int y = halfSize1; y < source.rows - halfSize1; y++)
+	{
+		for (int x = halfSize1; x < source.cols - halfSize1; x++)
+		{
+			double xPoint = 0, yPoint = 0;
+			for (int i = 0; i < size1; i++)
+			{
+				for (int j = 0; j < size1; j++)
+				{
+					uchar xValue = source.at<uchar>(y + i - halfSize1, x + j - halfSize1);
+					xPoint = xPoint + (xValue * xMask[i][j]);
+					uchar yValue = source.at<uchar>(y + i - halfSize1, x + j - halfSize1);
+					yPoint = yPoint + (yValue * yMask[i][j]);
+				}
+			}
+			xPoint = xPoint / 9.0;
+			yPoint = yPoint / 9.0;
+
+			uchar temp = sqrt(pow(xPoint, 2) + pow(yPoint, 2));
+
+			output.at<uchar>(y, x) = temp;
+		}
+	}
+}
+
 #endif

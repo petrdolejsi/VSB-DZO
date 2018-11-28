@@ -1,10 +1,7 @@
 #include "stdafx.h"
-#include "utils.h"
 
 const int rows = 240;
 const int cols = 300;
-
-cv::Mat rotate(const cv::Mat& source, const double angle);
 
 int exercise11()
 {
@@ -23,25 +20,30 @@ int exercise11()
 		cv::Mat tmpProjected = cv::Mat::zeros(rows, cols, CV_64FC1);
 		cv::Mat tmpProjectedRotated;
 		
-		rotated = rotate(original, i);
-		rotatedInverse = rotate(original, -i);
+		rotated = RotateImage(original, i);
+		rotatedInverse = RotateImage(original, -i);
 		cv::imshow("Image", rotated);
 		printf("Angle: %d\n", i);
 
-		for (int y = 0; y < rows; y++) {
-			for (int x = 0; x < cols; x++) {
+		for (int y = 0; y < rows; y++) 
+		{
+			for (int x = 0; x < cols; x++) 
+			{
 				tmpProjected.at<double>(y, 0)+= rotatedInverse.at<double>(y, x);
 			}
 		}
 
-		for (int k = 1; k < cols; k++) {
+		for (int k = 1; k < cols; k++) 
+		{
 			tmpProjected.col(0).copyTo(tmpProjected.col(k));
 		}
 
-		tmpProjectedRotated = rotate(tmpProjected, i);
+		tmpProjectedRotated = RotateImage(tmpProjected, i);
 
-		for (int y = 0; y < rows; y++) {
-			for (int x = 0; x < cols; x++) {
+		for (int y = 0; y < rows; y++) 
+		{
+			for (int x = 0; x < cols; x++) 
+			{
 				tmpResult.at<double>(y, x) += tmpProjectedRotated.at<double>(y, x);
 			}
 		}
@@ -51,8 +53,10 @@ int exercise11()
 
 		cv::normalize(tmpResult, result, 0.0, 1.0, CV_MINMAX);
 
-		for (int y = 0; y < rows; y++) {
-			for (int x = 0; x < cols; x++) {
+		for (int y = 0; y < rows; y++) 
+		{
+			for (int x = 0; x < cols; x++) 
+			{
 				result.at<double>(y, x) = result.at<double>(y, x) * (i/360.0);
 			}
 		}
@@ -70,20 +74,4 @@ int exercise11()
 	cvWaitKey();
 
 	return 0;
-}
-
-cv::Mat rotate(const cv::Mat &source, const double angle)
-{
-	cv::Point center = cv::Point(source.cols / 2, source.rows / 2);
-	double scale = 1.0;
-
-	cv::Mat rotated_matrix( 2, 3, CV_32FC1);
-
-	cv::Mat rotated_image;
-
-	rotated_matrix = cv::getRotationMatrix2D(center, angle, scale);
-
-	cv::warpAffine(source, rotated_image, rotated_matrix, source.size());
-
-	return rotated_image;
 }

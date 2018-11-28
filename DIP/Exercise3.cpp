@@ -2,7 +2,6 @@
 
 int exercise3()
 {
-
 	cv::Mat original = cv::imread("images/lena.png", CV_LOAD_IMAGE_COLOR); // load color image from file system to Mat variable, this will be loaded using 8 bits (uchar)
 
 	if (original.empty()) 
