@@ -26,9 +26,9 @@ int exercise13()
 		{
 			double X = (resultCentral.at<uchar>(x - 1, y) - resultCentral.at<uchar>(x + 1, y)) * 0.5;
 			double Y = (resultCentral.at<uchar>(x, y - 1) - resultCentral.at<uchar>(x, y + 1)) * 0.5;
-			int alpha = atan2(Y, X);
+			double alpha = atan2(Y, X);
 
-			int a = tan(alpha);
+			double a = tan(alpha);
 
 			if (alpha >= 0 && alpha < PI / 2)
 			{
@@ -48,7 +48,7 @@ int exercise13()
 					result.at<uchar>(x, y) = resultCentral.at<uchar>(x, y);
 				}
 			}
-			else if (alpha >= PI && alpha < (3/2)*PI)
+			else if (alpha >= PI && alpha < (3.0 / 2.0) * PI)
 			{
 				double tempA = a * resultCentral.at<uchar>(x, y - 1) + (1 - a) * (resultCentral.at<uchar>(x - 1, y));
 				double tempB = a * resultCentral.at<uchar>(x, y + 1) + (1 - a) * (resultCentral.at<uchar>(x + 1, y));
@@ -57,7 +57,7 @@ int exercise13()
 					result.at<uchar>(x, y) = resultCentral.at<uchar>(x, y);
 				}
 			}
-			else if (alpha >= (3 / 2)*PI && alpha < 2*PI)
+			else if (alpha >= (3.0 / 2.0)*PI && alpha <= 2*PI)
 			{
 				double tempA = a * resultCentral.at<uchar>(x + 1, y) + (1 - a) * (resultCentral.at<uchar>(X, y - 1));
 				double tempB = a * resultCentral.at<uchar>(x - 1, y) + (1 - a) * (resultCentral.at<uchar>(x, y + 1));
