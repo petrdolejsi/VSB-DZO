@@ -389,3 +389,5 @@ ASALocalRun/
 *.ilk
 *.tlog
 *.ipch
+*.ipk
+x64/
